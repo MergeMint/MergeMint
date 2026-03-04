@@ -9,6 +9,11 @@ GitHub PR lifecycle auto-reward using USDC:
 - PR opened: `0.1 USDC` (test value)
 - PR merged: `0.1 USDC` (test value)
 
+Reward network plan:
+
+- Current (experimental): `Base Sepolia` testnet USDC rewards
+- Production target: `Base Mainnet` real USDC rewards
+
 This repository contains:
 
 - `contracts/PrBountyDistributor.sol`: reward distribution contract
@@ -65,6 +70,8 @@ Suggested workflow:
 ## Current Status
 
 - Live test setup is running with `0.1 / 0.1 USDC` rewards (opened / merged).
+- Current payouts are on `Base Sepolia` testnet USDC.
+- Mainnet launch will switch payouts to real USDC on `Base Mainnet`.
 - Parameters are intentionally conservative for faucet and testnet limits.
 - Architecture is still evolving; breaking changes are expected.
 
