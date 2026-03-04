@@ -43,12 +43,23 @@ export function adminPageHtml(): string {
       button { background: var(--primary); color: #fff; cursor: pointer; }
       button.danger { background: var(--danger); }
       .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
-      .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+      .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 10px; overflow: hidden; min-width: 0; }
       .kpi .v { font-weight: 700; font-size: 18px; margin-top: 4px; }
       table { width: 100%; border-collapse: collapse; font-size: 13px; }
       th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 4px; }
       .muted { color: var(--muted); font-size: 12px; }
       code { background: #ecf2ff; padding: 2px 6px; border-radius: 6px; }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 14px;
+        word-break: break-all;
+        white-space: normal;
+      }
+      .nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+      @media (max-width: 820px) {
+        input { min-width: 220px; width: 100%; }
+        .row { align-items: stretch; }
+      }
       .err { color: var(--danger); white-space: pre-wrap; }
     </style>
   </head>
@@ -106,8 +117,15 @@ export function adminPageHtml(): string {
         errEl.textContent = msg || "";
       }
 
-      function kpi(label, value) {
-        return '<div class="kpi"><div class="muted">' + label + '</div><div class="v">' + value + '</div></div>';
+      function shortAddr(addr) {
+        if (!addr || addr.length < 14) return addr || "-";
+        return addr.slice(0, 8) + "..." + addr.slice(-6);
+      }
+
+      function kpi(label, value, options = {}) {
+        const cls = options.valueClass ? ("v " + options.valueClass) : "v";
+        const title = options.title ? (' title="' + String(options.title).replaceAll('"', "&quot;") + '"') : "";
+        return '<div class="kpi"><div class="muted">' + label + '</div><div class="' + cls + '"' + title + '>' + value + '</div></div>';
       }
 
       async function refresh() {
@@ -119,7 +137,7 @@ export function adminPageHtml(): string {
         }
         const d = await r.json();
         document.getElementById("kpis").innerHTML = [
-          kpi("Bot", '<code>' + d.bot + '</code>'),
+          kpi("Bot", '<span class="mono nowrap">' + shortAddr(d.bot) + '</span>', { title: d.bot }),
           kpi("Mock Mode", String(d.mockReward)),
           kpi("Paused", String(d.contract.paused)),
           kpi("Processed", String(d.processedCount)),

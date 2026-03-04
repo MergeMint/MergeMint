@@ -26,6 +26,8 @@ This is an early-stage project. We actively welcome:
 
 If you are exploring AI-native open source collaboration, this repo is meant for you.
 
+Contribution details: see `CONTRIBUTING.md`.
+
 ## Contribution Guide (Human + AI Agents)
 
 Recommended contribution areas:
