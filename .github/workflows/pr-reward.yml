@@ -1,0 +1,38 @@
+name: PR Auto Reward
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+permissions:
+  contents: read
+
+jobs:
+  reward:
+    if: ${{ github.event.action == 'opened' || (github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install service dependencies
+        run: npm ci
+        working-directory: service
+
+      - name: Reward PR author on-chain
+        working-directory: service
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+          BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
+          DISTRIBUTOR_CONTRACT: ${{ secrets.DISTRIBUTOR_CONTRACT }}
+          GITHUB_TO_WALLET_JSON: ${{ secrets.GITHUB_TO_WALLET_JSON }}
+          ALLOWED_REPOS: ${{ github.repository }}
+          OPEN_REWARD_USDC: ${{ vars.OPEN_REWARD_USDC || '0.1' }}
+          MERGE_REWARD_USDC: ${{ vars.MERGE_REWARD_USDC || '0.1' }}
+          USDC_DECIMALS: ${{ vars.USDC_DECIMALS || '6' }}
+        run: node scripts/reward_from_github_event.mjs

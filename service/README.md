@@ -42,6 +42,12 @@ GITHUB_WEBHOOK_SECRET=your_secret ./scripts/send_pr_webhook.sh opened
 GITHUB_WEBHOOK_SECRET=your_secret ./scripts/send_pr_webhook.sh merged
 ```
 
+Run direct reward from a GitHub event payload (used by Actions):
+
+```bash
+node scripts/reward_from_github_event.mjs
+```
+
 ## Endpoints
 
 - `GET /healthz`

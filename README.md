@@ -2,13 +2,14 @@
 
 GitHub PR lifecycle auto-reward using USDC:
 
-- PR opened: `1 USDC`
-- PR merged: `10 USDC`
+- PR opened: `0.1 USDC` (test value)
+- PR merged: `0.1 USDC` (test value)
 
 This repository contains:
 
 - `contracts/PrBountyDistributor.sol`: reward distribution contract
 - `service/`: GitHub webhook service that triggers rewards on-chain
+- `.github/workflows/pr-reward.yml`: GitHub Actions auto-reward on PR events
 
 ## Flow
 
@@ -26,6 +27,26 @@ This repository contains:
 - Service-level idempotency store
 - Contract-level idempotency guard
 - Contract owner-only reward calls
+
+## GitHub Actions mode (recommended for repo testing)
+
+This repo includes `.github/workflows/pr-reward.yml` to reward directly from GitHub Actions:
+
+- `pull_request.opened` => `OPEN_REWARD_USDC` (default `0.1`)
+- merged PR (`pull_request.closed` + `merged=true`) => `MERGE_REWARD_USDC` (default `0.1`)
+
+Set repository secrets:
+
+- `RPC_URL`
+- `BOT_PRIVATE_KEY`
+- `DISTRIBUTOR_CONTRACT`
+- `GITHUB_TO_WALLET_JSON` (JSON map, for example `{"alice":"0x..."}`)
+
+Optional repository variables:
+
+- `OPEN_REWARD_USDC` (default `0.1`)
+- `MERGE_REWARD_USDC` (default `0.1`)
+- `USDC_DECIMALS` (default `6`)
 
 ## Quick start
 
