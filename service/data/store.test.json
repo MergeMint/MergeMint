@@ -1,0 +1,12 @@
+{
+  "processed": {
+    "acme/payroll#42:merged": {
+      "at": "2026-03-04T05:12:37.068Z",
+      "txHash": "mock-tx-d59663a76a6be32f"
+    },
+    "acme/payroll#101:merged": {
+      "at": "2026-03-04T05:13:30.854Z",
+      "txHash": "mock-tx-86085d0f5cd5cf9a"
+    }
+  }
+}

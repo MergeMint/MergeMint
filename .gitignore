@@ -1,0 +1,9 @@
+.env
+node_modules/
+dist/
+*.log
+service/data/store.json
+contracts/node_modules/
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/

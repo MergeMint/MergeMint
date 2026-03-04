@@ -1,0 +1,16 @@
+{
+  "processed": {
+    "acme/payroll#99:opened": {
+      "at": "2026-03-04T05:06:46.111Z",
+      "txHash": "0x95ce298f7e8abbf116b52125c7c6797a945de127ebbbb4ee9370b585e29e3316"
+    },
+    "acme/payroll#102:merged": {
+      "at": "2026-03-04T05:14:09.502Z",
+      "txHash": "0xebc8323657850cbb9a4690f0088596402dc64eb46330ad10b67469747a1daee2"
+    },
+    "acme/payroll#103:opened": {
+      "at": "2026-03-04T05:16:27.027Z",
+      "txHash": "0xa13c91cf19d32044f7927ceabf4dd768e66d6dd2de06514aaf12f8dab3b9eda1"
+    }
+  }
+}
