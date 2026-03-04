@@ -50,6 +50,14 @@ Suggested workflow:
 2. Submit a small PR with tests and clear scope.
 3. For AI-generated changes, include assumptions and verification steps in PR description.
 
+## Reward Eligibility (Important)
+
+To receive rewards, contributors must submit their wallet address in advance.
+
+- If your GitHub account has no wallet mapping, reward payout will be skipped.
+- No retroactive payout is guaranteed for unmapped PR events.
+- Use a valid EVM address on the target network.
+
 ## Flow
 
 1. GitHub sends `pull_request` webhook events.

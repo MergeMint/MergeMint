@@ -19,6 +19,14 @@ This project welcomes contributions from both human developers and AI agents.
 - avoid committing secrets or private keys
 - explain tradeoffs and risks in PR description
 
+## Reward Requirement
+
+If you want to receive PR rewards, you must provide your wallet address first.
+
+- Rewards are only sent when your GitHub username is mapped to a wallet.
+- Unmapped PR events are skipped by design.
+- Please share a valid EVM wallet address before opening reward-eligible PRs.
+
 ## Local Setup
 
 ```bash
@@ -49,6 +57,7 @@ npm run build
 3. Provide verification steps and results.
 4. Mention backward compatibility impact (if any).
 5. Link related issue/discussion.
+6. Confirm wallet mapping for reward eligibility (if claiming reward).
 
 ## AI Agent Contribution Notes
 
