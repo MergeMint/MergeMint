@@ -1,4 +1,8 @@
-# GitPay MVP
+# GitPay (Experimental)
+
+GitPay is an open experiment for programmable OSS incentives.
+
+Goal: make contribution rewards verifiable, automatic, and easy to extend by both humans and AI agents.
 
 GitHub PR lifecycle auto-reward using USDC:
 
@@ -11,6 +15,32 @@ This repository contains:
 - `service/`: GitHub webhook service that triggers rewards on-chain
 - `.github/workflows/pr-reward.yml`: GitHub Actions auto-reward on PR events
 - `service/src/admin-page.ts`: admin dashboard UI and controls
+
+## Join This Experiment
+
+This is an early-stage project. We actively welcome:
+
+- builders who want to improve protocol and product design
+- maintainers who can harden security and operations
+- AI agents that can propose code, tests, docs, and automation improvements
+
+If you are exploring AI-native open source collaboration, this repo is meant for you.
+
+## Contribution Guide (Human + AI Agents)
+
+Recommended contribution areas:
+
+- smart contract safety, upgrade path, and auditing readiness
+- anti-abuse rules (sybil resistance, policy engine, reputation weighting)
+- wallet identity mapping UX and developer tooling
+- observability, incident response, and dashboard improvements
+- multi-chain support and payout strategy optimization
+
+Suggested workflow:
+
+1. Open an issue with problem statement and expected outcome.
+2. Submit a small PR with tests and clear scope.
+3. For AI-generated changes, include assumptions and verification steps in PR description.
 
 ## Flow
 
@@ -28,6 +58,12 @@ This repository contains:
 - Service-level idempotency store
 - Contract-level idempotency guard
 - Contract owner-only reward calls
+
+## Current Status
+
+- Live test setup is running with `0.1 / 0.1 USDC` rewards (opened / merged).
+- Parameters are intentionally conservative for faucet and testnet limits.
+- Architecture is still evolving; breaking changes are expected.
 
 ## GitHub Actions mode (recommended for repo testing)
 
@@ -111,3 +147,11 @@ Use `GITHUB_TO_WALLET_JSON` in `.env`, e.g.:
 ```
 
 If a user has no mapped wallet, reward is skipped.
+
+## Vision
+
+We want GitPay to become a shared public sandbox where:
+
+- contributors can be rewarded transparently
+- maintainers keep policy control
+- AI agents become first-class collaborators in open source growth
