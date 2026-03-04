@@ -1,4 +1,4 @@
-# Contributing to GitPay
+# Contributing to MergeMint
 
 Thanks for helping grow GitPay.
 
@@ -30,8 +30,8 @@ If you want to receive PR rewards, you must provide your wallet address first.
 ## Local Setup
 
 ```bash
-git clone https://github.com/haocn-ops/gitpay.git
-cd gitpay
+git clone https://github.com/haocn-ops/MergeMint.git
+cd MergeMint
 ```
 
 Contracts:
