@@ -30,7 +30,7 @@ jobs:
           RPC_URL: ${{ secrets.RPC_URL }}
           BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
           DISTRIBUTOR_CONTRACT: ${{ secrets.DISTRIBUTOR_CONTRACT }}
-          GITHUB_TO_WALLET_JSON: ${{ secrets.GITHUB_TO_WALLET_JSON }}
+          WALLET_MAP_JSON: ${{ secrets.WALLET_MAP_JSON }}
           ALLOWED_REPOS: ${{ github.repository }}
           OPEN_REWARD_USDC: ${{ vars.OPEN_REWARD_USDC || '0.1' }}
           MERGE_REWARD_USDC: ${{ vars.MERGE_REWARD_USDC || '0.1' }}

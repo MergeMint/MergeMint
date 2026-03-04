@@ -40,7 +40,7 @@ Set repository secrets:
 - `RPC_URL`
 - `BOT_PRIVATE_KEY`
 - `DISTRIBUTOR_CONTRACT`
-- `GITHUB_TO_WALLET_JSON` (JSON map, for example `{"alice":"0x..."}`)
+- `WALLET_MAP_JSON` (JSON map, for example `{"alice":"0x..."}`)
 
 Optional repository variables:
 

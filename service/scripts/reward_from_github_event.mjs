@@ -67,7 +67,11 @@ if (!prNumber || !githubUser) {
   throw new Error("Invalid event payload: missing pull_request.number or pull_request.user.login");
 }
 
-const walletMap = parseWalletMap(requiredEnv("GITHUB_TO_WALLET_JSON"));
+const walletMapRaw = process.env.WALLET_MAP_JSON || process.env.GITHUB_TO_WALLET_JSON;
+if (!walletMapRaw || !walletMapRaw.trim()) {
+  throw new Error("Missing env: WALLET_MAP_JSON");
+}
+const walletMap = parseWalletMap(walletMapRaw);
 const recipient = walletMap[githubUser];
 if (!recipient) {
   console.log(`no wallet mapping for user=${githubUser}, skipped`);
