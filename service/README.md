@@ -69,6 +69,22 @@ Service-level:
 - `STORE_PATH` JSON tracks processed event IDs.
 - Event ID format: `owner/repo#pr_number:opened|merged`
 
+## Admin dashboard
+
+Set `ADMIN_TOKEN` in `.env`, then open:
+
+- `GET /admin`
+
+Dashboard features:
+
+- service and contract status (`paused`, owner, USDC balances)
+- recent processed rewards (from store)
+- pause/resume rewards on-chain (`setPaused`)
+
+Auth for admin APIs:
+
+- header `X-Admin-Token: <ADMIN_TOKEN>` or `Authorization: Bearer <ADMIN_TOKEN>`
+
 Contract-level:
 
 - `processed[bytes32(eventId)]` blocks duplicate reward calls.

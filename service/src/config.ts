@@ -40,6 +40,7 @@ export const settings = {
   openRewardUsdc: Number(process.env.OPEN_REWARD_USDC || "1"),
   mergeRewardUsdc: Number(process.env.MERGE_REWARD_USDC || "10"),
   storePath: process.env.STORE_PATH || "./data/store.json",
+  adminToken: process.env.ADMIN_TOKEN || "",
 };
 
 if (!settings.mockReward) {

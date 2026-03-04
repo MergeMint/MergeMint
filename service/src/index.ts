@@ -3,6 +3,7 @@ import { settings } from "./config.js";
 import { buildEventId, resolveRewardKind, verifyGithubSignature, type PullRequestEvent } from "./github.js";
 import { Rewarder } from "./rewarder.js";
 import { JsonStore } from "./store.js";
+import { adminPageHtml } from "./admin-page.js";
 
 const app = express();
 const rewarder = new Rewarder(
@@ -13,12 +14,71 @@ const rewarder = new Rewarder(
 );
 const store = new JsonStore(settings.storePath);
 
+function isAuthorizedAdmin(req: express.Request): boolean {
+  if (!settings.adminToken) {
+    return false;
+  }
+  const fromHeader = req.header("X-Admin-Token") || "";
+  const auth = req.header("Authorization") || "";
+  const fromBearer = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+  return fromHeader === settings.adminToken || fromBearer === settings.adminToken;
+}
+
 app.get("/healthz", (_req, res) => {
   res.status(200).json({
     ok: true,
     bot: rewarder.botAddress,
     mockReward: settings.mockReward,
   });
+});
+
+app.get("/admin", (_req, res) => {
+  if (!settings.adminToken) {
+    res.status(404).send("admin disabled");
+    return;
+  }
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.send(adminPageHtml());
+});
+
+app.get("/admin/api/status", async (req, res): Promise<void> => {
+  try {
+    if (!isAuthorizedAdmin(req)) {
+      res.status(401).json({ ok: false, error: "unauthorized" });
+      return;
+    }
+    const contract = await rewarder.getAdminStatus();
+    res.status(200).json({
+      ok: true,
+      bot: rewarder.botAddress,
+      mockReward: settings.mockReward,
+      config: {
+        openRewardUsdc: settings.openRewardUsdc,
+        mergeRewardUsdc: settings.mergeRewardUsdc,
+      },
+      processedCount: store.count(),
+      recent: store.recent(30),
+      contract,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "unknown error";
+    res.status(500).json({ ok: false, error: message });
+  }
+});
+
+app.post("/admin/api/pause", express.json(), async (req, res): Promise<void> => {
+  try {
+    if (!isAuthorizedAdmin(req)) {
+      res.status(401).json({ ok: false, error: "unauthorized" });
+      return;
+    }
+    const paused = Boolean(req.body?.paused);
+    const txHash = await rewarder.setPaused(paused);
+    res.status(200).json({ ok: true, paused, txHash });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "unknown error";
+    res.status(500).json({ ok: false, error: message });
+  }
 });
 
 app.post(

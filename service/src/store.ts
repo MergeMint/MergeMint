@@ -5,6 +5,12 @@ type StoreSchema = {
   processed: Record<string, { at: string; txHash: string }>;
 };
 
+export type ProcessedEntry = {
+  eventId: string;
+  at: string;
+  txHash: string;
+};
+
 export class JsonStore {
   private readonly filePath: string;
   private data: StoreSchema;
@@ -25,6 +31,21 @@ export class JsonStore {
       txHash,
     };
     this.write();
+  }
+
+  count(): number {
+    return Object.keys(this.data.processed).length;
+  }
+
+  recent(limit = 20): ProcessedEntry[] {
+    return Object.entries(this.data.processed)
+      .map(([eventId, v]) => ({
+        eventId,
+        at: v.at,
+        txHash: v.txHash,
+      }))
+      .sort((a, b) => b.at.localeCompare(a.at))
+      .slice(0, Math.max(1, limit));
   }
 
   private ensureFile(): void {

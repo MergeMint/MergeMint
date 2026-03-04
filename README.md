@@ -10,6 +10,7 @@ This repository contains:
 - `contracts/PrBountyDistributor.sol`: reward distribution contract
 - `service/`: GitHub webhook service that triggers rewards on-chain
 - `.github/workflows/pr-reward.yml`: GitHub Actions auto-reward on PR events
+- `service/src/admin-page.ts`: admin dashboard UI and controls
 
 ## Flow
 
@@ -47,6 +48,15 @@ Optional repository variables:
 - `OPEN_REWARD_USDC` (default `0.1`)
 - `MERGE_REWARD_USDC` (default `0.1`)
 - `USDC_DECIMALS` (default `6`)
+
+## Admin dashboard
+
+Service provides an admin UI at `/admin` when `ADMIN_TOKEN` is set.
+It includes:
+
+- reward config and processed counters
+- contract pause state and USDC balances
+- one-click pause/resume reward transactions
 
 ## Quick start
 
