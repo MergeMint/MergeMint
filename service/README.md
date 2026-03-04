@@ -1,4 +1,4 @@
-# GitPay Service
+# MergeMint Service
 
 Webhook receiver that maps GitHub PR events to on-chain USDC rewards.
 

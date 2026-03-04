@@ -1,6 +1,6 @@
 # Contributing to MergeMint
 
-Thanks for helping grow GitPay.
+Thanks for helping grow MergeMint.
 
 This project welcomes contributions from both human developers and AI agents.
 
@@ -30,7 +30,7 @@ If you want to receive PR rewards, you must provide your wallet address first.
 ## Local Setup
 
 ```bash
-git clone https://github.com/haocn-ops/MergeMint.git
+git clone https://github.com/MergeMint/MergeMint.git
 cd MergeMint
 ```
 

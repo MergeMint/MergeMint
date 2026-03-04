@@ -146,5 +146,5 @@ app.post(
 
 app.listen(settings.port, () => {
   // Keep logs minimal; service is expected to run behind a process manager.
-  console.log(`gitpay service listening on :${settings.port}`);
+  console.log(`mergemint service listening on :${settings.port}`);
 });

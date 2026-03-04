@@ -4,7 +4,7 @@ export function adminPageHtml(): string {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GitPay Admin</title>
+    <title>MergeMint Admin</title>
     <style>
       :root {
         --bg: #f5f7fb;
@@ -66,7 +66,7 @@ export function adminPageHtml(): string {
   <body>
     <div class="wrap">
       <div class="card">
-        <h1>GitPay Admin Dashboard</h1>
+        <h1>MergeMint Admin Dashboard</h1>
         <div class="row">
           <input id="token" type="password" placeholder="ADMIN_TOKEN" />
           <button id="saveToken">Save Token</button>
@@ -103,10 +103,17 @@ export function adminPageHtml(): string {
       const errEl = document.getElementById("err");
       const actionResult = document.getElementById("actionResult");
 
-      tokenInput.value = localStorage.getItem("gitpay_admin_token") || "";
+      const LEGACY_TOKEN_KEY = "gitpay_admin_token";
+      const TOKEN_KEY = "mergemint_admin_token";
+      const legacyValue = localStorage.getItem(LEGACY_TOKEN_KEY) || "";
+      const currentValue = localStorage.getItem(TOKEN_KEY) || "";
+      if (!currentValue && legacyValue) {
+        localStorage.setItem(TOKEN_KEY, legacyValue);
+      }
+      tokenInput.value = localStorage.getItem(TOKEN_KEY) || "";
 
       function token() {
-        return localStorage.getItem("gitpay_admin_token") || "";
+        return localStorage.getItem(TOKEN_KEY) || "";
       }
 
       function headers() {
@@ -168,7 +175,7 @@ export function adminPageHtml(): string {
       }
 
       document.getElementById("saveToken").onclick = async () => {
-        localStorage.setItem("gitpay_admin_token", tokenInput.value.trim());
+        localStorage.setItem(TOKEN_KEY, tokenInput.value.trim());
         await refresh().catch((e) => setErr(String(e)));
       };
       document.getElementById("refresh").onclick = () => refresh().catch((e) => setErr(String(e)));
