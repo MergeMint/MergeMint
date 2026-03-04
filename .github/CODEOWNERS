@@ -1,0 +1,7 @@
+# Default owners for all files
+* @haocn-ops
+
+# Critical paths
+/contracts/ @haocn-ops
+/.github/workflows/ @haocn-ops
+/service/src/ @haocn-ops
