@@ -1,6 +1,8 @@
-# GitPay (Experimental)
+# MergeMint (Experimental)
 
-GitPay is an open experiment for programmable OSS incentives.
+Merge code. Mint rewards.
+
+MergeMint is an open experiment for programmable OSS incentives.
 
 Goal: make contribution rewards verifiable, automatic, and easy to extend by both humans and AI agents.
 
@@ -168,7 +170,7 @@ If a user has no mapped wallet, reward is skipped.
 
 ## Vision
 
-We want GitPay to become a shared public sandbox where:
+We want MergeMint to become a shared public sandbox where:
 
 - contributors can be rewarded transparently
 - maintainers keep policy control
