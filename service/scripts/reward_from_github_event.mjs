@@ -94,12 +94,12 @@ const signer = new ethers.Wallet(requiredEnv("BOT_PRIVATE_KEY"), provider);
 const distributor = new ethers.Contract(
   requiredEnv("DISTRIBUTOR_CONTRACT"),
   [
-    "function distributeIfNotProcessed(string eventId, address to, uint256 amount) external",
+    "function reward(address to, uint256 amount, bytes32 eventId) external",
   ],
   signer,
 );
 
-const tx = await distributor.distributeIfNotProcessed(eventId, recipient, amount);
+const tx = await distributor.reward(recipient, amount, ethers.id(eventId));
 const receipt = await tx.wait();
 
 console.log(
